@@ -23,14 +23,21 @@ export const GuessNumber = () => {
                 value={input}
                 className="numberBox"
                 style={{ display: "block" }}
-                onChange={(e) => { setInput(e.target.value) }} />
+                onChange={(e) => { setInput(e.target.value) }}
+                onKeyDown={(e) => {
+                    if (e.key == "Enter") {
+                        compare(guess, setGuess, input, setNote, count, setResult, setGameWon, setCount);
+                    }
+                }}
+            />
             <button
                 disabled={isButtonDisabled(input, note)}
                 type="button"
                 className="button"
                 onClick={() => {
                     compare(guess, setGuess, input, setNote, count, setResult, setGameWon, setCount);
-                }}>
+                }}
+            >
                 Guess
             </button>
 
