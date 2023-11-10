@@ -12,11 +12,14 @@ export const compare = (guess, setGuess, input, setNote, count, setResult, setGa
         setResult(count + " times you tried!");
         setGameWon(true)
     } else if (parseInt(input) > randomNumber) {
-        setNote(guessNumber.Lower);
+        setNote("")
+        setTimeout(() => setNote(guessNumber.Lower), 100)
     }
     else if (parseInt(input) < randomNumber) {
-        setNote(guessNumber.Higher)
+        setNote("")
+        setTimeout(() => setNote(guessNumber.Higher), 100)
     }
+    //Yukarıda setTimeOut methodunun kullanılmasının sebebi her tekrardan sonra ekrana gelen geri bildirimin daha dinamik güncellenmesi için.
 };
 
 export const isButtonDisabled = (input, note) =>
