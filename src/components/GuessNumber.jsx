@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { VscDebugRestart } from 'react-icons/vsc';
-import guessNumber from '../enums/guessNumber';
+import { compare, handleRestart, isButtonDisabled, upperLimit } from '../methods/methods';
 
 export const GuessNumber = () => {
 
@@ -11,41 +11,6 @@ export const GuessNumber = () => {
     const [count, setCount] = useState(1);
     const [result, setResult] = useState("");
     const [gameWon, setGameWon] = useState(false);
-    //#endregion
-
-    const upperLimit = 100;
-
-
-
-    //#region functions
-    const compare = () => {
-
-        const randomNumber = guess !== null ? guess : Math.floor((Math.random() * upperLimit) + 1)
-        setGuess(randomNumber)
-        if (parseInt(input) === randomNumber) {
-            setNote(guessNumber.YouWon);
-            setResult(count + " times you tried!");
-            setGameWon(true)
-        } else if (parseInt(input) > randomNumber) {
-            setNote(guessNumber.Lower);
-        }
-        else if (parseInt(input) < randomNumber) {
-            setNote(guessNumber.Higher)
-        }
-    };
-
-    const isButtonDisabled = () =>
-        !(parseInt(input)) || note === guessNumber.YouWon;
-
-
-    const handleRestart = () => {
-        setNote("Enter a number and click to guess!");
-        setResult("");
-        setInput('');
-        setCount(1);
-        setGameWon(false);
-
-    }
     //#endregion
 
     return (
@@ -60,12 +25,12 @@ export const GuessNumber = () => {
                 style={{ display: "block" }}
                 onChange={(e) => { setInput(e.target.value) }} />
             <button
-                disabled={isButtonDisabled()}
+                disabled={isButtonDisabled(input, note)}
                 type="button"
                 className="button"
                 onClick={() => {
                     setCount(count + 1);
-                    compare();
+                    compare(guess, setGuess, input, setNote, count, setResult, setGameWon);
                 }}>
                 Guess
             </button>
@@ -73,7 +38,7 @@ export const GuessNumber = () => {
             {gameWon && (
                 <div>
                     <button onClick={() => {
-                        handleRestart();
+                        handleRestart(setNote, setInput, setResult, setCount, setGameWon);
                         setGuess(null);
                     }}
                         type='button'
