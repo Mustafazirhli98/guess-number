@@ -29,8 +29,7 @@ export const GuessNumber = () => {
                 type="button"
                 className="button"
                 onClick={() => {
-                    setCount(count + 1);
-                    compare(guess, setGuess, input, setNote, count, setResult, setGameWon);
+                    compare(guess, setGuess, input, setNote, count, setResult, setGameWon, setCount);
                 }}>
                 Guess
             </button>
@@ -38,8 +37,7 @@ export const GuessNumber = () => {
             {gameWon && (
                 <div>
                     <button onClick={() => {
-                        handleRestart(setNote, setInput, setResult, setCount, setGameWon);
-                        setGuess(null);
+                        handleRestart(setNote, setInput, setResult, setCount, setGameWon, setGuess);
                     }}
                         type='button'
                         className='btn btn-danger'><VscDebugRestart fontSize={"25px"} />
