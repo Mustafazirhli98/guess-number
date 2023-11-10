@@ -3,7 +3,7 @@ import guessNumber from "../enums/guessNumber";
 export const upperLimit = 100;
 
 //#region functions
-export const compare = (guess, setGuess, input, setNote, count, setResult, setGameWon,setCount) => {
+export const compare = (guess, setGuess, input, setNote, count, setResult, setGameWon, setCount) => {
 
     const randomNumber = guess !== null ? guess : Math.floor((Math.random() * upperLimit) + 1)
     setGuess(randomNumber)
